@@ -16,8 +16,8 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/api/tasks", (req, res) => {
-  client.query("SELECT * FROM tasks").then((result) => {
+app.get("/api/user", (req, res) => {
+  client.query("SELECT * FROM userinfo;").then((result) => {
     res.send(result.rows);
   });
 });

@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from "react";
 
-const App = () => {
-  const [tasks, setTasks] = useState([]);
+import Header from './Header.jsx';
+import Main from './Main.jsx';
+import Left from './Left.jsx';
+import Right from './Right.jsx';
 
-  useEffect(() => {
-    fetch("/api/tasks")
-      .then((res) => res.json())
-      .then((tasks) => {
-        setTasks(tasks);
-      });
-  }, []);
+const App = () => {
+  const [playerPosition, setPlayerPosition] = useState('')
+
+  const [rpgText, setText] = useState('')
+  const [userResponse, setUserResponse] = useState('');
+  // const [tasks, setTasks] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("/api/user")
+  //     .then((res) => res.json())
+  //     .then((tasks) => {
+  //       setTasks(tasks);
+  //     });
+  // }, []);
 
   return (
-    <main>
-      {tasks.map((task) => (
-        <span className="task" key={task.id}>
-          {task.description}
-        </span>
-      ))}
-    </main>
+    <>
+      <Header />
+      <Main
+        playerPosition = {playerPosition}
+        setPlayerPosition = {setPlayerPosition}
+        userResponse = {userResponse}
+        setUserResponse = {setUserResponse}
+      />
+      <Left />
+      <Right />
+    </>
   );
 };
 
