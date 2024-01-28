@@ -7,24 +7,28 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
     useEffect(() => {
         console.log(mapData)
     }, [])
-
+    
     let rpgText = () => {
         return mapData[playerPosition].detail;
     }
 
     let submitCommand = (event) => {
-        // would possibly have to check for command on submit, or error
         let userResponse = event.target.value
         
         if (event.key !== 'Enter') {
             return;
         }
         // splitting input into command/detail pairs
-        let commandWord = userResponse.split(' ')[0]
-        let detailWord = userResponse.split(' ')[1]
-        if (commandWord == 'move') {
-            Anemone.move(detailWord)
+        let commandWord = userResponse.split(' ')[0];
+        let detailWord = userResponse.split(' ')[1];
+        
+        // handles commands
+        if (commandWord.toLowerCase() === 'return') {
+            Anemone.goBack();
+        } else if (commandWord.toLowerCase() === 'move') {
+            Anemone.move(detailWord);
         }
+        
     }
 
     // Classes ////////////////////////////////////////////////////////////////////
@@ -39,12 +43,13 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
             console.log(playerPosition)
             setPlayerPosition(mapData[playerPosition].rooms[direction])
         }
-        inspect() {
-
-        }
         goBack() {
-
+            setPlayerPosition(mapData[playerPosition].previous)
         }
+        inspect() {
+            // for examining entities/objects/points of interest
+        }
+        
     }
 
     const Enemy = class {

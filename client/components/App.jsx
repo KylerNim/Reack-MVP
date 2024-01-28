@@ -5,6 +5,7 @@ import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Left from './Left.jsx';
 import Right from './Right.jsx';
+import Footer from './footer.jsx';
 
 const App = () => {
   const [playerPosition, setPlayerPosition] = useState('startingRoom')
@@ -13,6 +14,8 @@ const App = () => {
   const [currentRPGText, setText] = useState('')
   const [userResponse, setUserResponse] = useState('');
 
+  
+  
   // useEffect(() => {
   //   fetch("/api/user")
   //     .then((res) => res.json())
@@ -23,6 +26,8 @@ const App = () => {
 
   return (
     <>
+      <img id="backG" src="./../resources/background.png"></img>
+
       <Header />
       <Main
         playerPosition = {playerPosition}
@@ -38,6 +43,7 @@ const App = () => {
       />
       <Left />
       <Right />
+      <Footer />
     </>
   );
 };

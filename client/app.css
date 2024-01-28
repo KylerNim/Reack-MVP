@@ -2,12 +2,29 @@ body {
   background-color: rgb(32, 32, 44);
   overflow: hidden;
 }
+#backG {
+  position: absolute;
+  top: 5vh;
+  right: 0%;
+  height: 110vh;
+  width: auto;
+  opacity: .1;
+}
 
 #header {
   position: absolute;
-  height: 6vh;
+  height: 8vh;
   width: 100vw;
   top: 0%;
+  left: 0%;
+  background-color: black;
+  outline: solid thin white;
+}
+#footer {
+  position: absolute;
+  height: 8vh;
+  width: 100vw;
+  bottom: 0vh;
   left: 0%;
   background-color: black;
   outline: solid thin white;
@@ -22,7 +39,7 @@ body {
   left: 25vw;
   height: 94vh;
   width: 50vw;
-  outline: solid thin blue;
+  /* outline: solid thin blue; */
 }
 #viewport {
   position: relative;
@@ -57,4 +74,45 @@ body {
   color: white;
   text-align: center;
   font-size: large;
+}
+
+#leftPanel {
+  position: absolute;
+  top: 16vh;
+  left: 0vw;
+  height: 65.6vh;
+  width: 23vw;
+  background-color: black;
+  outline: solid thin white;
+}
+
+#rightPanel {
+  position: absolute;
+  display:flex;
+  flex-flow: column;
+  align-items: center;
+  top: 16vh;
+  right: 0vw;
+  height: 65.6vh;
+  width: 23vw;
+  background-color: black;
+  outline: solid thin white;
+}
+#imgBounds {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  top: 2vh;
+  height: 45vh;
+  width: 20vw;
+  background-color: rgb(28, 27, 37);
+  outline: thin solid rgb(80, 80, 80);
+}
+#characterImg {
+  position: relative;
+  height: 90vh;
+  bottom: 5vh;
+  right: .5vw;
+  outline: thin solid red;
 }
