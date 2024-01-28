@@ -1,31 +1,73 @@
-import map from './../mapData.js'
+import React, { useEffect, useState } from "react";
 
-const Main = ({playerPosition, setPlayerPosition, userResponse, setUserResponse}) => {
+// will eventually clean up this massive parameter list once im sure what wont need to go elsewhere
+const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, currentRPGText, setText, mapData}) => {
+    // Functionality ///////////////////////////////////////////////////////////////
+    // this is just so it doesnt log every time i re-render =.=
+    useEffect(() => {
+        console.log(mapData)
+    }, [])
+
     let rpgText = () => {
-        return 'sam';
+        return mapData[playerPosition].detail;
     }
 
-    let recordCommand = (event) => {
-        let currentCommand = event.target.value;
-        setUserResponse(currentCommand);
-    }
     let submitCommand = (event) => {
-        // would possibly have to chack for command on submit, or error
+        // would possibly have to check for command on submit, or error
+        let userResponse = event.target.value
+        
+        if (event.key !== 'Enter') {
+            return;
+        }
+        // splitting input into command/detail pairs
+        let commandWord = userResponse.split(' ')[0]
+        let detailWord = userResponse.split(' ')[1]
+        if (commandWord == 'move') {
+            Anemone.move(detailWord)
+        }
     }
 
+    // Classes ////////////////////////////////////////////////////////////////////
+    const Player = class {
+        constructor(hp, position, items) {
+            this.hp = hp;
+            this.position = position;
+            this.items = items;
+        }
 
+        move(direction) {
+            console.log(playerPosition)
+            setPlayerPosition(mapData[playerPosition].rooms[direction])
+        }
+        inspect() {
+
+        }
+        goBack() {
+
+        }
+    }
+
+    const Enemy = class {
+        constructor(hp) {
+            this.hp = hp;
+        }
+    }
+    // Initial Game Set-up ///////////////////////////////////////////////////////
+    let Anemone = new Player(20, 'startingRoom', []);
+
+    
+    // DOM Components ///////////////////////////////////////////////////////////
     return (
         <div id="main">
             <div id='viewport'>
-                {/* image will go here */}
-                <p id="environmentResponse" class='text'>{rpgText()}</p>
-                <p id="locDetail" class="text">{rpgText()}</p> 
+                <div id='imgTemp'></div>
+                {/* <p id="environmentResponse" className='text'>{rpgText()}</p> */}
+                <p id="locDetail" className="text">{rpgText()}</p> 
             </div>
             <input 
             id ='commandBox'
             type="text"
             placeholder="Type Command Here"
-            onChange={recordCommand}
             onKeyDown={submitCommand}
             />
         </div>

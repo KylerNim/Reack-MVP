@@ -8,3 +8,5 @@ CREATE TABLE userInfo (
 
 INSERT INTO userInfo(userName, password) VALUES('KylerNim', 1234);
 INSERT INTO userInfo(userName, password) VALUES('John Wick', 4321);
+
+CREATE TABLE characterData ()
