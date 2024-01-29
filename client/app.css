@@ -11,8 +11,11 @@ body {
   opacity: .1;
 }
 
+/* // Header /////////////////////////////////////////////////////// */
 #header {
   position: absolute;
+  display: flex;
+  justify-content: center;
   height: 8vh;
   width: 100vw;
   top: 0%;
@@ -20,6 +23,14 @@ body {
   background-color: black;
   outline: solid thin white;
 }
+#title {
+  position: relative;
+  top: 1vh;
+  height: 6vh;
+  width: 24vw;
+}
+
+/* // Footer /////////////////////////////////////////////////////// */
 #footer {
   position: absolute;
   height: 8vh;
@@ -30,6 +41,7 @@ body {
   outline: solid thin white;
 }
 
+/* // Main /////////////////////////////////////////////////////// */
 #main {
   position: absolute;
   display: flex;
@@ -75,9 +87,20 @@ body {
   text-align: center;
   font-size: large;
 }
+.terminalText {
+  color: white;
+  text-align: center;
+  font-size: medium;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
 
+/* // Left /////////////////////////////////////////////////////// */
 #leftPanel {
   position: absolute;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   top: 16vh;
   left: 0vw;
   height: 65.6vh;
@@ -85,7 +108,31 @@ body {
   background-color: black;
   outline: solid thin white;
 }
+#inventory {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  /* top: 3vh; */
+  height: 32vh;
+  width: 22.5vw;
+  outline: thin dotted white;
+}
+.item {
+  position: relative;
+  height: 8vh;
+  width: 5vw;
+  outline: solid white thin;
+}
+#commandList {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  height: 27vh;
+  width: 22.5vw;
+  outline: thin dotted white;
+}
 
+/* // Right /////////////////////////////////////////////////////// */
 #rightPanel {
   position: absolute;
   display:flex;
