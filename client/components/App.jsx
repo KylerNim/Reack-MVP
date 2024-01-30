@@ -41,6 +41,11 @@ const App = () => {
     }
     move(direction) {
       // advances player to specified "child" location
+      const nextRoom = mapData[playerPosition].rooms[direction]
+      if (mapData[nextRoom].locked && mapData[nextRoom].locked !== '') {
+        alert('locked');
+        return;
+      }
       if (mapData[playerPosition].rooms[direction] === undefined) {
         alert('bad command');
       } else {
@@ -121,7 +126,7 @@ const App = () => {
         setItemView = {setItemView}
       />
       <Left 
-        characterData = {characterData}
+        Anemone = {Anemone}
       />
       <Right 
         Anemone = {Anemone}

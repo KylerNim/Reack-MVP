@@ -71,6 +71,7 @@ const mapData = {
             'is the hole in the back wall.',
             'You feel discomfort at the sight of it, but it\'s happy to see you.'
         ],
+        inspect: {/* Shelf */ shelf: 'janitorsShelf', shelves: 'janitorsShelf',/* Hole */ hole: 'hole'},
         previous: 'hallway1'
     },
     hallway2: {
@@ -128,6 +129,7 @@ const mapData = {
     },
     tutorialExit: {
         // ends the tutorial, is electrically locked
+        locked: 'this door is locked',
         previous: 'cafeteria',
     },
 
@@ -173,13 +175,32 @@ const mapData = {
     
     // startingRoom //////////////////////////////////
     desk: {
-        detail1: ['wow desk!'],
-        detail2: ['this is a desk'],
+        itemKey: 'desk key',
+        detail1: [
+            
+        ],
+        detail2: [
+            'Looking closer at the desk',
+            'There are papers and documents strewn across the desk.',
+            'Test filled with various colored liquid, left unsealed, all seem to be growing mold.',
+            'There is a drawer, sealed with a key-lock.'
+        ],
+        detail3: [
+            '--',
+            'You unlock the drawer using the Desk Key.',
+            'Inside the desk you find what appears to be medicine!',
+            'Although you don\'t recognize the brand...'
+        ],
+        item: 'medicine',
         previous: 'startingRoom',
     },
     controlPanel: {
-        detail1: ['this is the control panel'],
-        detail2: ['this is a panel'],
+        detail1: [
+            'this is the control panel'
+        ],
+        detail2: [
+            'this is a panel'
+        ],
         previous: 'startingRoom',
     },
     leftPod: {
@@ -187,6 +208,21 @@ const mapData = {
     },
     rightPod: {
         // you swear you saw something brush across the dark glass but, even squinting your eyes, seeing what lies beneath its surface proves too difficult.
+    },
+
+    // Janitors Closet //////////////////////////////
+    janitorsShelf: {
+        itemKey: 'pet',
+        detail1: [
+            'Looking more closely at the shelf you find a small key ring, labeled "Desk Keys"',
+            '--'
+        ],
+        detail2: [
+            'Other than the key, the desk is just filled with tools and cleaning products.',
+            'It doesn\'t seem as though the Janitor has been around in a while.'
+        ],
+        item: 'desk key',
+        previous: 'closet'
     },
 
 

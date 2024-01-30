@@ -9,6 +9,15 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         console.log(mapData)
     }, [])
 
+    // if an item is to be got at a location, it will give it
+    useEffect(() => {
+        if (mapData[playerPosition].item && Anemone.items.includes(mapData[playerPosition].itemKey)) {
+            Anemone.items.push(mapData[playerPosition].item);
+            console.log('got ',mapData[playerPosition].item)
+            console.log(Anemone.items)
+        }
+    },[playerPosition])
+
     // This is the text that only appears the first time you go there
     let initialText = () => {
         if (!mapData[playerPosition].detail1) {
@@ -22,8 +31,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         ));
     }
     // this text appears every time you return there as well
-    let repeatText = () => {
-        console.log(mapData[itemView])
+    let consistentText = () => {
         if (!mapData[playerPosition].detail2) {
             return null;
         }
@@ -35,6 +43,16 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         return mapData[playerPosition].detail2.map((detail, index) => (
             <p key={index} className="terminalText">{detail}</p>
         ));
+    }
+
+    let conditionalText = () => {
+        if (mapData[playerPosition].detail3 && Anemone.items.includes(mapData[playerPosition].itemKey)) {
+            return mapData[playerPosition].detail3.map((detail, index) => (
+                <p key={index} className="terminalText">{detail}</p>
+            ));
+        } else {
+            return null;
+        }
     }
 
     let decideText = () => {
@@ -93,7 +111,8 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
             <div id='viewport'>
                 <img src="./../resources/startingRoom.png" id='imgTemp'></img>
                 {initialText()}
-                {repeatText()}
+                {consistentText()}
+                {conditionalText()}
             </div>
             <input 
             id ='commandBox'

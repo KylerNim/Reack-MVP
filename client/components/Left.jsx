@@ -1,9 +1,9 @@
 import Item from './Item.jsx';
 
-const Left = ({ characterData }) => {
+const Left = ({ Anemone }) => {
     const renderInventory = () => {
-        if (characterData.items) {
-            return characterData.items.map((item, index) => (
+        if (Anemone.items) {
+            return Anemone.items.map((item, index) => (
                 <Item key={index} id={item} />
             ));
         } else {
