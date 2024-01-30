@@ -11,7 +11,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
 
     // if an item is to be got at a location, it will give it
     useEffect(() => {
-        if (mapData[playerPosition].item && Anemone.items.includes(mapData[playerPosition].itemKey)) {
+        if (mapData[playerPosition].item && Anemone.items.includes(mapData[playerPosition].itemKey) && !Anemone.items.includes(mapData[playerPosition].item)) {
             Anemone.items.push(mapData[playerPosition].item);
             console.log('got ',mapData[playerPosition].item)
             console.log(Anemone.items)
