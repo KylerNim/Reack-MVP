@@ -18,12 +18,18 @@ const App = () => {
 
   // Classes ////////////////////////////////////////////////////////////////////
   const Player = class {
-    constructor(hp, position, items) {
+    constructor(hp, position, history, items) {
         this.hp = hp;
         this.position = position;
+        this.history = history;
         this.items = items;
     }
     
+    updateHistory() {
+      if (Anemone.history.includes(playerPosition) === false) {
+        Anemone.history.push(playerPosition);
+      }
+    }
     exit() {
       if (mapData[playerPosition].rooms.exit === undefined) {
         alert('bad command');
@@ -33,10 +39,10 @@ const App = () => {
     }
     move(direction) {
       // advances player to specified "child" location
-      console.log(playerPosition)
       if (mapData[playerPosition].rooms[direction] === undefined) {
         alert('bad command');
       } else {
+        this.updateHistory();
         setPlayerPosition(mapData[playerPosition].rooms[direction])
       }
     }
@@ -45,6 +51,7 @@ const App = () => {
       if (mapData[playerPosition].previous === undefined) {
         alert('Return where..?')
       } else {
+        this.updateHistory();
         setPlayerPosition(mapData[playerPosition].previous)
       }
     }
@@ -67,7 +74,7 @@ const App = () => {
       }
   }
   // Initial Game Set-up ///////////////////////////////////////////////////////
-  let Anemone = new Player(characterData.hp, 'pod', characterData.items);
+  let Anemone = new Player(characterData.hp, 'pod', characterData.hasbeen, characterData.items);
   
   // Currently sets userData on initioal load (just sets mine for now)
   useEffect(() => {

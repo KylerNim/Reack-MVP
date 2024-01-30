@@ -8,11 +8,19 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         console.log(mapData)
     }, [])
     
+    // This is the text that only appears the first time you go there
     let initialText = () => {
+        if (!mapData[playerPosition].detail1) {
+            return null;
+        }
+        if (Anemone.history && Anemone.history.includes(playerPosition)) {
+            return null;
+        }
         return mapData[playerPosition].detail1.map((detail, index) => (
             <p key={index} className="terminalText">{detail}</p>
         ));
     }
+    // this text appears every time you return there as well
     let repeatText = () => {
         if (!mapData[playerPosition].detail2) {
             return null;

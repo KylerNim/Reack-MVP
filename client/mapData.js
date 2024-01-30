@@ -1,7 +1,9 @@
 const mapData = {
+    
+    // Locations //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     pod: {
         // Wakes up in pod in a dark room
-        detail1: [
+        detail2: [
             'You wake up.',
             'Outside of the broken pod you were sleeping in you can barely make out the dark room around you.',
             'The broken glass looks sharp, lets be careful not to cut oursleves',
@@ -29,6 +31,9 @@ const mapData = {
         // hallway is only lighted by the light spilling out from the other rooms
         // The darkness seems to get deeper down the hall
         detail1: [
+            'this is the initial text'
+        ],
+        detail2: [
             'you are in the hallway', 
             'there is a room to your right', 
             'and one to your left', 
@@ -76,7 +81,15 @@ const mapData = {
             'this is apparently a cafeteria'
         ],
         rooms: {left: 'kitchen', forward: 'tutorial exit'}
-    }
+    },
+
+    
+    
+    // Inspect Results ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    controlPanel: {
+        detail1: [''],
+        containedIn: 'startingRoom',
+    },
 }
 
 export default mapData;
