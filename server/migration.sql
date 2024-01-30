@@ -21,4 +21,4 @@ CREATE TABLE characterData (
   ON DELETE CASCADE
 );
 
-INSERT INTO characterData(hp, userPosition, user_id, hasBeen, items) VALUES(20, 'pod', 1, ARRAY['pod'], ARRAY['petRock']);
+INSERT INTO characterData(hp, userPosition, user_id, hasBeen, items) VALUES(20, 'pod', 1, ARRAY['pod'], ARRAY['pet']);

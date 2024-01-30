@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { render } from "react-dom";
 
 // will eventually clean up this massive parameter list once im sure what wont need to go elsewhere
 const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, currentRPGText, setText, mapData, Anemone, playerData, characterData, itemView, setItemView}) => {
@@ -7,7 +8,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
     useEffect(() => {
         console.log(mapData)
     }, [])
-    
+
     // This is the text that only appears the first time you go there
     let initialText = () => {
         if (!mapData[playerPosition].detail1) {
@@ -22,8 +23,14 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
     }
     // this text appears every time you return there as well
     let repeatText = () => {
+        console.log(mapData[itemView])
         if (!mapData[playerPosition].detail2) {
             return null;
+        }
+        if (itemView) {
+            return mapData[itemView].detail2.map((detail, index) => (
+                <p key={index} className="terminalText">{detail}</p>
+            ));
         }
         return mapData[playerPosition].detail2.map((detail, index) => (
             <p key={index} className="terminalText">{detail}</p>
@@ -58,15 +65,29 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         } else if (verb === 'exit') {
             console.log('exiting')
             Anemone.exit();
-        } else if  (['inspect', 'examine', 'look', 'observe'].includes(verb)) {
-            (currentRoom.inspect[context]) ? Anemone.inspect(currentRoom.inspect[context]) : alert('inspect what...?');
+        } else if (['inspect', 'examine', 'look', 'observe'].includes(verb)) {
+            const inspectAction = currentRoom.inspect;
+            if (inspectAction && inspectAction.hasOwnProperty(context)) {
+                const inspectedItem = inspectAction[context];
+                if (inspectedItem !== undefined) {
+                    Anemone.inspect(inspectedItem);
+                } else if (Anemone.items.includes(context)) {
+                    console.log(context);
+                    // setItemView(context);
+                } else {
+                    alert('inspect what...?');
+                }
+            } else if (Anemone.items.includes(context)) {
+                setItemView(context);
+            } else {
+                alert('inspect what...?');
+            }
         } else if (['use'].includes(verb)) {
             Anemone.use(context);
         }
     }
     
     // DOM Components ///////////////////////////////////////////////////////////
-    // if ()
     return (
         <div id="main">
             <div id='viewport'>

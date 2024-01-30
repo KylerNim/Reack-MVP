@@ -16,7 +16,7 @@ const App = () => {
 
   const [currentRPGText, setText] = useState('')
 
-  const [itemView, setItemView] = useState(false);
+  const [itemView, setItemView] = useState('');
 
   // Classes ////////////////////////////////////////////////////////////////////
   const Player = class {

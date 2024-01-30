@@ -191,17 +191,18 @@ const mapData = {
 
 
     // Items /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    petRock: {
+    pet: {
         name: 'Pet Rock',
         detail2: [
-            'Is\'nt he cute\?',
+            'Isn\'t he cute\?',
             'What should I call him...?',
             '--',
             '[It makes you feel better]'
         ]
     },
-    hp50: {
-        name: 'HP+50',
+    medicine: {
+        name: 'Medicine',
+        detail2: 'its medicine',
         value: 50,
     },
 }
