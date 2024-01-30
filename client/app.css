@@ -64,6 +64,17 @@ body {
   background-color: rgb(0, 0, 0);
   outline: solid thin white;
 }
+#itemPort {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  top: 10vh;
+  height: 60vh;
+  width: 50vw;
+  background-color: rgb(0, 0, 0);
+  outline: solid thin white;
+}
 #imgTemp {
   position: relative;
   margin-top: 2vh;
@@ -153,7 +164,7 @@ body {
   top: 2vh;
   height: 45vh;
   width: 20vw;
-  background-color: rgb(28, 27, 37);
+  background-color: rgb(71, 57, 85);
   outline: thin solid rgb(80, 80, 80);
 }
 #characterImg {

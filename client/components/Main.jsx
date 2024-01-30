@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // will eventually clean up this massive parameter list once im sure what wont need to go elsewhere
-const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, currentRPGText, setText, mapData, Anemone, playerData, characterData}) => {
+const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, currentRPGText, setText, mapData, Anemone, playerData, characterData, itemView, setItemView}) => {
     // Functionality ///////////////////////////////////////////////////////////////
     // this is just so it doesnt log every time i re-render =.=
     useEffect(() => {
@@ -36,6 +36,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
 
     let submitCommand = (event) => {
         let userResponse = event.target.value.toLowerCase();
+        let currentRoom = mapData[playerPosition];
         
         if (event.key !== 'Enter') {
             return;
@@ -52,16 +53,20 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         // handles commands
         if (verb === 'return') {
             Anemone.goBack();
-        } else if (verb === 'move') {
+        } else if (['move', 'go'].includes(verb)) {
             Anemone.move(context);
         } else if (verb === 'exit') {
             console.log('exiting')
             Anemone.exit();
+        } else if  (['inspect', 'examine', 'look', 'observe'].includes(verb)) {
+            (currentRoom.inspect[context]) ? Anemone.inspect(currentRoom.inspect[context]) : alert('inspect what...?');
+        } else if (['use'].includes(verb)) {
+            Anemone.use(context);
         }
-        
     }
     
     // DOM Components ///////////////////////////////////////////////////////////
+    // if ()
     return (
         <div id="main">
             <div id='viewport'>

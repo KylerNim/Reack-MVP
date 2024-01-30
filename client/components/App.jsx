@@ -16,6 +16,8 @@ const App = () => {
 
   const [currentRPGText, setText] = useState('')
 
+  const [itemView, setItemView] = useState(false);
+
   // Classes ////////////////////////////////////////////////////////////////////
   const Player = class {
     constructor(hp, position, history, items) {
@@ -55,8 +57,16 @@ const App = () => {
         setPlayerPosition(mapData[playerPosition].previous)
       }
     }
-    inspect() {
-      // for examining entities/objects/points of interest
+    inspect(item) {
+      setPlayerPosition(item);
+    }
+    addToInventory() {
+
+    }
+    use(item) {
+      // uses item in inventory
+      console.log('using ', item)
+      console.log(this.items)
     }
     heal(value) {
       // Increase health from item
@@ -107,6 +117,8 @@ const App = () => {
         Anemone = {Anemone}
         playerData = {playerData}
         characterData = {characterData}
+        itemView = {itemView}
+        setItemView = {setItemView}
       />
       <Left 
         characterData = {characterData}
