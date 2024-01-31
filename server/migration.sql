@@ -22,3 +22,4 @@ CREATE TABLE characterData (
 );
 
 INSERT INTO characterData(hp, userPosition, user_id, hasBeen, items) VALUES(20, 'pod', 1, ARRAY['pod'], ARRAY['pet']);
+INSERT INTO characterData(hp, userPosition, user_id, hasBeen, items) VALUES(55, 'cafeteria', 2, ARRAY['pod'], ARRAY['pet']);

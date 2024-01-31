@@ -6,17 +6,16 @@ import Main from './Main.jsx';
 import Left from './Left.jsx';
 import Right from './Right.jsx';
 import Footer from './footer.jsx';
+import Login from './Login.jsx';
 
 const App = () => {
-  const [playerData, setPlayerData] = useState({})
-  const [characterData, setCharacterData] = useState({})
-
-  const [playerPosition, setPlayerPosition] = useState('pod')
-  const [mapStatus, setMapStatus] = useState([])
-
-  const [currentRPGText, setText] = useState('')
-
+  const [userObj, setUserObj] = useState({});
+  const [playerData, setPlayerData] = useState(null);
+  const [characterData, setCharacterData] = useState({});
+  const [playerPosition, setPlayerPosition] = useState('pod');
   const [itemView, setItemView] = useState('');
+
+  
 
   // Classes ////////////////////////////////////////////////////////////////////
   const Player = class {
@@ -46,7 +45,6 @@ const App = () => {
     move(direction) {
       // advances player to specified "child" location
       const nextRoom = mapData[playerPosition].rooms[direction]
-      console.log(mapData[nextRoom])
 
       if (mapData[playerPosition].rooms[direction] === undefined) {
         alert('bad command');
@@ -75,12 +73,21 @@ const App = () => {
     }
     use(item) {
       // uses item in inventory
-      console.log('using ', item)
-      console.log(this.items)
+      if (!this.items.includes(item)) {
+        alert('you don\'t have that item!')
+      }
+      if (item === 'medicine') {
+        this.heal(50);
+      } else {
+        alert('can\'t use like that!');
+      }
     }
     heal(value) {
       // Increase health from item
+      console.log('healing...')
       this.hp += value;
+      console.log(this.hp)
+      // setHealth(this.hp);
     }
     takeDamage(value) {
       // Reduce health from entity attack/environment hazard
@@ -94,39 +101,43 @@ const App = () => {
       }
   }
   // Initial Game Set-up ///////////////////////////////////////////////////////
-  let Anemone = new Player(characterData.hp, 'pod', characterData.hasbeen, characterData.items);
+  let Anemone = new Player(characterData.hp, characterData.userposition, characterData.hasbeen, characterData.items);
   
   // Currently sets userData on initioal load (just sets mine for now)
   useEffect(() => {
-    fetch("/api/user")
+    fetch(`/api/user/${userObj.user}`)
       .then((res) => res.json())
-      .then((data) => setPlayerData(data[0]))
+      .then((data) => {
+        if (data[0]?.password === userObj.pass) {
+          setPlayerData(data[0]);
+        } else {
+          console.log('failed authentication');
+        }
+      })
       .catch((error) => console.error('Error fetching player data:', error));
-    }, []);
+  }, [userObj]);
+
   useEffect(() => {
-    fetch("/api/char/1")
-      .then((res) => res.json())
-      .then((data) => setCharacterData(data[0]))
-  }, [])
-    // console.log(playerData)
-    // console.log(characterData)
+    if (playerData) { // Check if playerData is truthy
+      fetch(`/api/char/${playerData.id}`)
+        .then((res) => res.json())
+        .then((data) => setCharacterData(data[0]))
+        .catch((error) => console.error('Error fetching character data:', error));
+    }
+  }, [playerData]);
+  
   return (
     <>
       <img id="backG" src="./../resources/background.png"></img>
-
+      <Login 
+        setUserObj = {setUserObj}
+        characterData={characterData}
+      />
       <Header />
       <Main
         playerPosition = {playerPosition}
-        setPlayerPosition = {setPlayerPosition}
-        mapStatus = {mapStatus}
-        setMapStatus = {setMapStatus}
-        currentRPGText = {currentRPGText}
-        setText = {setText}
-
         mapData = {mapData}
         Anemone = {Anemone}
-        playerData = {playerData}
-        characterData = {characterData}
         itemView = {itemView}
         setItemView = {setItemView}
       />

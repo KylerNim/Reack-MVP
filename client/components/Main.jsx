@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
 
 // will eventually clean up this massive parameter list once im sure what wont need to go elsewhere
-const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, currentRPGText, setText, mapData, Anemone, playerData, characterData, itemView, setItemView}) => {
+const Main = ({playerPosition, mapData, Anemone, itemView, setItemView}) => {
     // Functionality ///////////////////////////////////////////////////////////////
     // this is just so it doesnt log every time i re-render =.=
     useEffect(() => {
@@ -16,6 +16,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
             console.log('got ',mapData[playerPosition].item)
             console.log(Anemone.items)
         }
+        console.log(Anemone)
     },[playerPosition])
 
     // This is the text that only appears the first time you go there
@@ -53,10 +54,6 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         } else {
             return null;
         }
-    }
-
-    let decideText = () => {
-
     }
 
     let submitCommand = (event) => {
@@ -101,6 +98,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
                 alert('inspect what...?');
             }
         } else if (['use'].includes(verb)) {
+            console.log('using...')
             Anemone.use(context);
         }
     }

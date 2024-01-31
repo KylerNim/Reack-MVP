@@ -16,8 +16,10 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/api/user", (req, res) => {
-  pool.query("SELECT * FROM userInfo WHERE id = 1;")
+app.get("/api/user/:userName", (req, res) => {
+  let user = req.params.userName;
+
+  pool.query("SELECT * FROM userInfo WHERE username = $1;", [user])
     .then((result) => { res.status(200).json(result.rows) })
     .catch((error) => { res.status(404).send(error); })
 });
