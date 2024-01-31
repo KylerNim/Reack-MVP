@@ -39,6 +39,11 @@ body {
   height: 3vh;
   width: 30vw;
 }
+#registerButton {
+  position: relative;
+  height: 3vh;
+  width: 10vw;
+}
 
 /* // Header /////////////////////////////////////////////////////// */
 #header {

@@ -1,7 +1,8 @@
-const Item = ({props}) => {
+const Item = ({ item }) => {
+    console.log(item)
     return (
-        <div className="item"></div>
-    )
-}
+        <img src={`./../resources/${item}.png`} className="item" alt={item}></img>
+    );
+};
 
 export default Item;

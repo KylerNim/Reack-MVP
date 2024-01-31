@@ -31,6 +31,23 @@ app.get("/api/char/:id", (req, res) => {
   .catch((error) => { res.status(404).send(error); })
 })
 
+app.post("/api/user", (req, res) => {
+  let {username, password} = req.body;
+  pool.query("INSERT INTO userinfo(username, password) VALUES($1, $2);", [username, password])
+  .then((result) => { res.status(201).send('created'); })
+  .catch((err) => { res.status(500).send('didnt work') })
+})
+app.post("/api/char", (req, res) => {
+  let {hp, items, userposition, hasbeen, user_id} = req.body;
+  pool.query("INSERT INTO userinfo(username, password) VALUES($1, $2);", [username, password])
+  .then((result) => { res.status(201).send('created'); })
+  .catch((err) => { res.status(500).send('didnt work') })
+})
+
+// app.update("/api/char/:id", (req, res) => {
+//   let {hp, items, userposition, hasbeen} = req.body;
+// })
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

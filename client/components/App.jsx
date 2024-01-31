@@ -14,7 +14,7 @@ const App = () => {
   const [characterData, setCharacterData] = useState({});
   const [playerPosition, setPlayerPosition] = useState('pod');
   const [itemView, setItemView] = useState('');
-
+  const [register, setRegister] = useState(false)
   
 
   // Classes ////////////////////////////////////////////////////////////////////
@@ -103,8 +103,22 @@ const App = () => {
   // Initial Game Set-up ///////////////////////////////////////////////////////
   let Anemone = new Player(characterData.hp, characterData.userposition, characterData.hasbeen, characterData.items);
   
-  // Currently sets userData on initioal load (just sets mine for now)
   useEffect(() => {
+    if (register === true) {
+      fetch(`/api/user`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: userObj.user,
+          password: userObj.pass,
+        })
+      })
+      .then(res => res.json())
+      .catch(err => console.error(err))
+    }
     fetch(`/api/user/${userObj.user}`)
       .then((res) => res.json())
       .then((data) => {
@@ -118,11 +132,13 @@ const App = () => {
   }, [userObj]);
 
   useEffect(() => {
-    if (playerData) { // Check if playerData is truthy
+    if (playerData && register === false) {
       fetch(`/api/char/${playerData.id}`)
         .then((res) => res.json())
         .then((data) => setCharacterData(data[0]))
         .catch((error) => console.error('Error fetching character data:', error));
+    } else if (playerData) {
+      setCharacterData({hp: 50, items: ['pet'], userposition: 'pod', user_id: playerData.id})
     }
   }, [playerData]);
   
@@ -132,6 +148,8 @@ const App = () => {
       <Login 
         setUserObj = {setUserObj}
         characterData={characterData}
+        register={register}
+        setRegister={setRegister}
       />
       <Header />
       <Main

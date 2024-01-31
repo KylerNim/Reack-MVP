@@ -1,4 +1,5 @@
-const Login = ({setUserObj, characterData}) => {
+const Login = ({setUserObj, characterData, register, setRegister}) => {
+
     let login = (event) => {
         if (event.key === 'Enter') {
             let userObj = {};
@@ -6,6 +7,11 @@ const Login = ({setUserObj, characterData}) => {
             userObj.pass = document.querySelector('#password').value
             setUserObj(userObj);
         }
+    }
+
+    let registryButton = () => {
+        setRegister(true);
+        console.log('Registering now')
     }
 
     let renderLogin = () => {
@@ -28,6 +34,9 @@ const Login = ({setUserObj, characterData}) => {
                     onKeyDown={login}
                     />
                 </div>
+                <button 
+                onClick={registryButton}
+                id="registerButton">Register Now</button>
             </div>
             )
         } else {

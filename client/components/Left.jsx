@@ -4,7 +4,7 @@ const Left = ({ Anemone }) => {
     const renderInventory = () => {
         if (Anemone.items) {
             return Anemone.items.map((item, index) => (
-                <Item key={index} id={item} />
+                <Item key={index} id={item} item={item} />
             ));
         } else {
             return null;
