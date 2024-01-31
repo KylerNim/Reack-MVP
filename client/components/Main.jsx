@@ -23,7 +23,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
         if (!mapData[playerPosition].detail1) {
             return null;
         }
-        if (Anemone.history && Anemone.history.includes(playerPosition)) {
+        if (Anemone.history && Anemone.history.includes(playerPosition) || itemView) {
             return null;
         }
         return mapData[playerPosition].detail1.map((detail, index) => (
@@ -91,7 +91,7 @@ const Main = ({playerPosition, setPlayerPosition, mapStatus, setMapStatus, curre
                     Anemone.inspect(inspectedItem);
                 } else if (Anemone.items.includes(context)) {
                     console.log(context);
-                    // setItemView(context);
+                    setItemView(context);
                 } else {
                     alert('inspect what...?');
                 }

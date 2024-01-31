@@ -33,6 +33,10 @@ const App = () => {
       }
     }
     exit() {
+      if (itemView) {
+        setItemView('');
+        return;
+      }
       if (mapData[playerPosition].rooms.exit === undefined) {
         alert('bad command');
       } else {
@@ -42,12 +46,13 @@ const App = () => {
     move(direction) {
       // advances player to specified "child" location
       const nextRoom = mapData[playerPosition].rooms[direction]
-      if (mapData[nextRoom].locked && mapData[nextRoom].locked !== '') {
-        alert('locked');
-        return;
-      }
+      console.log(mapData[nextRoom])
+
       if (mapData[playerPosition].rooms[direction] === undefined) {
         alert('bad command');
+      } else if (mapData[nextRoom].unlock && !Anemone.items.includes(mapData[nextRoom].unlock)) {
+        alert('locked');
+        return;
       } else {
         this.updateHistory();
         setPlayerPosition(mapData[playerPosition].rooms[direction])
@@ -56,7 +61,7 @@ const App = () => {
     goBack() {
       // Returns player to "parent" location
       if (mapData[playerPosition].previous === undefined) {
-        alert('Return where..?')
+        alert('Are you crazy..?')
       } else {
         this.updateHistory();
         setPlayerPosition(mapData[playerPosition].previous)

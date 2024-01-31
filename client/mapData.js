@@ -120,6 +120,7 @@ const mapData = {
         // you should probably die here, there is no return (probably)
         detail2: [
             //stuck here til you load
+            '[DEATH ENDING 2]'
         ],
     },
     // Not sure how ill do hallway3, kind of want a chase or smthn. will lead to [insert here].. might have a weakened state affect the outcome depending on the healing item earlier
@@ -145,11 +146,25 @@ const mapData = {
     },
     kitchen: {
         // wanna add some kind of struggle/scary/battle/smthn, but for now just keyCard
+        itemKey: 'pet',
+        detail1: [
+            'Woah! theres a worm sitting on the table, furiously guarding a pair of heavy Boltcutters!',
+            'As its just a puny stupid worm, you smash it valiantly with your thumb.',
+            '--'
+        ],
+        detail2: [
+            'You feel somewhat guilty for having extinguished the worms life so coldly',
+            'But now you have a pair of Boltcutters, so who cares!'
+        ],
+        item: 'boltcutters',
         previous: 'cafeteria',
     },
     tutorialExit: {
         // ends the tutorial, is electrically locked
-        locked: 'this door is locked',
+        unlock: 'boltcutters',
+        detail2: [
+            '[TUTORIAL END]'
+        ],
         previous: 'cafeteria',
     },
 
@@ -204,7 +219,7 @@ const mapData = {
     
     // startingRoom //////////////////////////////////
     desk: {
-        itemKey: 'desk key',
+        itemKey: 'key',
         detail1: [
             
         ],
@@ -278,8 +293,17 @@ const mapData = {
             '--',
             '[return]'
         ],
-        item: 'desk key',
+        item: 'key',
         previous: 'closet'
+    },
+
+    // Cafeteria
+    exitDoor: {
+        detail2: [
+            'Chains are wrapped tightly around the doors\' handles',
+            'You might be able to cut them with something...'
+        ],
+        previous: 'cafeteria'
     },
 
 
@@ -289,14 +313,38 @@ const mapData = {
         detail2: [
             'Isn\'t he cute\?',
             'What should I call him...?',
+            '[It makes you feel better]',
             '--',
-            '[It makes you feel better]'
+            '[exit]'
         ]
     },
     medicine: {
         name: 'Medicine',
-        detail2: 'its medicine',
+        detail2: [
+            'its medicine',
+            '[restores 50hp on "use"]',
+            '--',
+            '[exit]'
+        ],
         value: 50,
+    },
+    key: {
+        name: 'Desk Master Key',
+        detail2: [
+            'It\'s the master key of all things labelled as "Desk"',
+            '[probably useful]',
+            '--',
+            '[exit]'
+        ],
+    },
+    boltcutters: {
+        name: 'Boltcutters',
+        detail2: [
+            'A heavy set up Boltcutters.',
+            '[It would probably cut through metal with ease.]',
+            '--',
+            '[exit]'
+        ]
     },
 }
 
